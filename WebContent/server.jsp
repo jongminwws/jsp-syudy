@@ -15,7 +15,7 @@
 메일 수신 거부는  
 <% 
 	String[] values = request.getParameterValues("email");
-	if(values != null){ //사용자가 아무것도 체크하지 않으면 반복할 필요가 없기 때문에 조건을 걸었다. ss
+	if(values != null){ //사용자가 아무것도 체크하지 않으면 반복할 필요가  ss없기 때문에 조건을 걸었다. ss
 	for(int i = 0;i<values.length;i++){
 	%>
 <%= values[i] %>
