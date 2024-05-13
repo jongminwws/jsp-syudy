@@ -7,8 +7,6 @@ import java.util.HashMap;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
 public class cookies {
 	private HashMap<String, Cookie> cookieMap = new HashMap<>();
 

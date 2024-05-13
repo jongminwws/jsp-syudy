@@ -1,10 +1,10 @@
-<%@page import="util.Cookies"%>
+<%@page import="util.cookies"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="util.Cookies" %>
-<%
-    Cookies cookies = new Cookies(request);
-%>
+<%@ page import="util.cookies" %>
+    <%
+    	Cookie cookie = new Cookie(request);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +13,14 @@
 </head>
 <body>
 <%
-    Cookie authCookie = cookies.getCookie("AUTH");
-    if (authCookie != null) {
-        String username = authCookie.getValue();
+	if(Cookie.getValue("AUTH")) {
 %>
-    아이디 "<%= username %>" 로 로그인 한 상태
+
+아이디 "<%= Cookie.getValue("AUTH") %>" 로 로그인 한 상태
 <%
-    } else {
+	}else {
 %>
-    로그인 하지 않은 상태
-<%
-    }
-%>
+	로그인 하지 않은 상태
+<% } %>
 </body>
 </html>
