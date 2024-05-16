@@ -2,6 +2,7 @@ package javaexample;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class CollectionFramework {
 	@SuppressWarnings("unused")
@@ -36,6 +37,6 @@ public class CollectionFramework {
 		list3.put("이몽룡", 90);
 		list3.put("춘향이", 78);
 		
-		System.out.println(list3.get("홍길동"));
+		Set<String> keyValue = list3.keySet(); //key 값 수집.
 	}
 }
