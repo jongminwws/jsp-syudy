@@ -10,8 +10,9 @@
 <h1>로그인 페이지</h1>
 <form action="loginsever.jsp" method="get">
 아이디 : <input type="text" name="memberid"> <br>
-비밀번호 : <input type="password" name= "pass"> <br>
-<input type = "submit" value="전송">
+비밀번호 : <input type="password" name="pass"> <br>
+<input type="submit" value="로그인"><br>
+<a href="http://localhost:8080/jspexample/membershipForm.jsp">회원가입</a>
 </form>
 </body>
 </html>
