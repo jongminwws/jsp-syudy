@@ -307,38 +307,35 @@ label[for="checkin"] {
 	color: white;
 }
 
-/*아이디, 비밀번호 찾기 스타일 */
+/* 아이디, 비밀번호 찾기 스타일 */
+.find-buttons {
+    margin-top: 35px;
+    text-align: center;
+}
+
+#idFindForm, #paFindForm {
+    display: inline-block;
+}
+
 #findid, #findpa {
-	display: inline-block;
-	text-align: center;
-	margin-top: 35px;
-	margin-left: 30px;
-	text-decoration: none;
-	color: black;
-	border: 1px solid transparent;
-	border-radius: 5px;
-	padding: 5px 10px;
-	transition: border-color 0.3s;
-	background-color: white;
-	margin-right: 20px;
-	font-size: 15px;
+	margin : 30px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: border-color 0.3s;
+    background-color: white;
+    margin-right: 20px;
+    font-size: 15px;
 }
 
 #findpa {
-	margin-left: 15px;
+    margin-left: 15px;
 }
 
-#findid, #findpa>a {
-	text-decoration: none;
-}
-
-a {
-	text-decoration: none;
-}
-
-/*아이디, 비밀번호 찾기 마우스 올렸을 때 */
 #findid:hover, #findpa:hover {
-	border-color: lightcoral;
+    border-color: lightcoral;
 }
 
 /*main2 구역 */
@@ -541,7 +538,7 @@ footer {
 	</header>
 	<main>
         <!--메인 추가-->
-        <form action="서버주소">
+        <form action="loginsever.jsp" method="post">
             <!-- 서버주소 보내기 -->
         <div id="container">
             <div id="huzi-container">
@@ -555,22 +552,30 @@ footer {
                     <form id="label">
                         <label id="id"> 아이디</label><br>
                         <!-- request.getparmater("id") html에 입력한 데이터 값 가져오기 -->
-                        <input type="text" id="name"> <br>
+                        <input type="text" id="name" name="memberid"> <br>
                         <label id="password">비밀번호 </label><br>
                         <!-- request.getparmater("password") html에 입력한 데이터 값 가져오기 -->
-                        <input type="password" id="pass"> <br>
+                        <input type="password" id="pass" name="pass"> <br>
                         <div id="id_save">
                             <input type="checkbox" name="" value=""><!--라디오 버튼 같은 경우 value에 설정한 값이 저장됨 -->
                             <label for="checkin">자동 로그인</label>
                         </div>
+                        </form>
                         <button id="login" type="submit" class="lojo">로그인</button>
                         <a href="#" id="join" class="logo lojo">회원가입</a>
-                        <button onclick="findid()" id="findid"><a href="http://127.0.0.1:5500/mini/idfind.html"
-                                target="_blank">아이디 찾기 ></a></button>
-                        <button onclick="findpass()" id="findpa"><a href="http://127.0.0.1:5500/mini/passwordfind.html"
-                                target="_blank">비밀번호 찾기 ></a></button> <br>
-                        <div></div>
-                        <div class="container">
+					<div class="find-buttons">
+						<form id="idFindForm" action="idfinds.jsp" method="post">
+							<input type="submit" id="findid" value="아이디 찾기">
+						</form>
+
+						<form id="paFindForm" action="findpa.jsp" method="post">
+							<input type="submit" id="findpa" value="비밀번호 찾기">
+						</form>
+					</div>
+
+
+
+					<div class="container">
                             <div class="item">
                                 <a href="#" id="kakaoLogin">
                                     <img src="img/kakao_logo.png" alt="카카오 로고">
@@ -591,8 +596,7 @@ footer {
 							%>
 							<a
 								href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=RhYUDtcrGAZKn45AMi7b&redirect_uri=http://localhost:8080/jspexample/callback.jsp&state=randomState">
-								<img height="50"
-								src="http://static.nid.naver.com/oauth/small_g_in.PNG" />
+								<img height="50" src="img/btnG_완성형.png" />
 							</a>
                             </div>
                         </div>
@@ -665,7 +669,15 @@ footer {
 	</footer>
 </body>
 <script type="text/javascript">
-    const loginButton = document.getElementById('login');
+document.getElementById('findid').addEventListener('click', function() {
+    document.getElementById('idFindForm').submit();
+});
+
+document.getElementById('findpa').addEventListener('click', function() {
+    document.getElementById('paFindForm').submit();
+});
+    
+    /* const loginButton = document.getElementById('login');
     loginButton.addEventListener('click', function (event) {
         event.preventDefault();
         const username = document.getElementById('name').value;
@@ -676,7 +688,7 @@ footer {
         } else {
             alert('아이디 또는 비밀번호가 올바르지 않습니다. 다시 확인해주세요.');
         }
-    });
+    }); */
     // 카카오톡 로그인
     function saveToDos(token) { //item을 localStorage에 저장합니다. 
         typeof (Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token));

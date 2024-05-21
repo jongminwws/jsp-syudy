@@ -11,6 +11,10 @@
 <h1>회원가입</h1>
 <table>
 <tr>
+    <td>아이디</td>
+    <td colspan="3"><input type="text" name="id" size="10"></td>
+</tr>
+<tr>
     <td>이메일</td>
     <td colspan="3"><input type="text" name="email" size="10"></td>
 </tr>

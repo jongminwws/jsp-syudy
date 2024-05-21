@@ -14,7 +14,7 @@
     boolean isValidUser = false;
 
     // DB 연결 정보
-    String jdbcUrl = "jdbc:mysql://localhost:3306/exx?serverTimezone=Asia/Seoul";
+    String jdbcUrl = "jdbc:mysql://localhost:3306/exx";
     String dbUser = "root";
     String dbPass = "1234";
 
@@ -23,35 +23,33 @@
         Connection conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
         String sql = "SELECT * FROM member WHERE memberid = ? AND password = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, memberid);
-        pstmt.setString(2, pass);
+        pstmt.setString(1, memberid);  // memberid 변수에 실제 회원 ID를 설정합니다
+        pstmt.setString(2, pass);      // pass 변수에 실제 비밀번호를 설정합니다
         ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
             isValidUser = true;
+            // 로그인 성공 시 세션 설정
             session.setAttribute("memberid", memberid);
         }
 
         rs.close();
         pstmt.close();
         conn.close();
-    } catch (Exception e) {
+    } catch (ClassNotFoundException | SQLException e) {
         e.printStackTrace();
     }
 
     if (isValidUser) {
-%>
-        <h2>로그인 성공</h2>
-        <p>환영합니다, <%= memberid %>님!</p>
-        <a href="px1.jsp">게시물 작성하기</a>
-<%
+        response.sendRedirect("http://localhost:8080/jspexample/callback.jsp");
     } else {
 %>
         <h2>로그인 실패</h2>
         <p>아이디 또는 비밀번호가 잘못되었습니다.</p>
-        <a href="login.jsp">다시 시도</a>
+        <a href="mainLogin.jsp">다시 시도</a>
 <%
     }
 %>
+
 </body>
 </html>

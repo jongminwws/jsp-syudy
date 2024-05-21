@@ -9,11 +9,6 @@
 <%@ page import="org.json.simple.parser.ParseException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.IOException" %>
-<html>
-<head>
-    <title>네이버 메인 페이지</title>
-</head>
-<body>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -538,7 +533,7 @@ footer {
 					</div>
 				</div>
 				<div class="rightMenu">
-					<button href="#">로그인</button>
+					<button href="#">로그아웃</button>
 					<span>&nbsp|&nbsp</span>
 					<div class="dropdown">
 						<button class="dropdownMen">한국어 / Korean ▼</button>
@@ -652,10 +647,6 @@ footer {
             responseStr.append(inputLine);
         }
         br.close();
-
-        // 네이버로부터 받은 응답 출력
-        out.println("Response from Naver: " + responseStr.toString() + "<br>");
-
         // JSON 형태의 응답 데이터를
 		JSONParser parser = new JSONParser();
         JSONObject responseObj = (JSONObject) parser.parse(responseStr.toString());
@@ -666,10 +657,7 @@ footer {
         // 여기서 필요에 따라 세션에 저장하거나 다른 작업을 수행할 수 있습니다.
         // 예를 들어, 세션에 accessToken을 저장하는 방법은 다음과 같습니다.
         session.setAttribute("naverAccessToken", accessToken);
-
-        // 성공적으로 처리했음을 사용자에게 알립니다.
-        out.println("네이버 로그인 성공!<br>");
-
+        
     } catch (IOException e) {
         // IOException 발생 시 처리
         e.printStackTrace();
