@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -104,13 +103,11 @@
     </div>
 
     <div class="card-body">
-        <form action=findidserver.jsp class="form-signin" method="POST">
+        <form name="idfindscreen" class="form-signin">
             <input type="text" name="name" id="name" class="form-control" placeholder="이름" required autofocus><br>
-
             <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
-
             <p class="check" id="check"></p><br/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
+            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="findID()">아이디 찾기</button>
         </form>
     </div>
 
@@ -131,23 +128,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    $("#name").focusout(function () {
-        if ($('#name').val() == "") {
-            $('#check').text('이름을 입력해주세요.');
-            $('#check').css('color', 'red');
-        } else {
-            $('#check').hide();
-        }
-    });
-
-    $("#email").focusout(function () {
-        if ($('#email').val() == "") {
-            $('#check').text('이메일을 입력해주세요');
-            $('#check').css('color', 'red');
-        } else {
-            $('#check').hide();
-        }
-    });
     function findID() {
         var name = document.getElementById('name').value;
         var email = document.getElementById('email').value;
@@ -159,12 +139,36 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var response = xhr.responseText;
-                alert(response); // 응답을 알림으로 표시
-                location.href = '<%= request.getContextPath() %>/mainLogin.jsp'; // 메인 로그인 페이지로 이동
+                if (response === "아이디를 찾을 수 없습니다.") {
+                    alert(response); // 아이디를 찾을 수 없는 경우 경고창 표시
+                } else {
+                    alert("회원님의 아이디는 " + response + "입니다."); // 아이디를 찾은 경우 알림으로 표시
+                    location.href = '<%= request.getContextPath() %>/mainLogin.jsp'; // 메인 로그인 페이지로 이동
+                }
             }
         };
         xhr.send('name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email));
     }
+
+    $(document).ready(function() {
+        $("#name").focusout(function () {
+            if ($('#name').val() == "") {
+                $('#check').text('이름을 입력해주세요.');
+                $('#check').css('color', 'red');
+            } else {
+                $('#check').hide();
+            }
+        });
+
+        $("#email").focusout(function () {
+            if ($('#email').val() == "") {
+                $('#check').text('이메일을 입력해주세요');
+                $('#check').css('color', 'red');
+            } else {
+                $('#check').hide();
+            }
+        });
+    });
 </script>
 
 </body>

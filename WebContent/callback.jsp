@@ -615,15 +615,15 @@ footer {
 		</div>
 	</footer>
 <%
-    String clientId = "RhYUDtcrGAZKn45AMi7b";
-    String clientSecret = "tZJcX7bgm9";
+    String clientId = "RhYUDtcrGAZKn45AMi7b"; // 네이버 api 클라이언트 id
+    String clientSecret = "tZJcX7bgm9"; // 네이ㅓ버 api 시크릿 넘버
     String code = request.getParameter("code");
     String state = request.getParameter("state");
     String redirectURI = URLEncoder.encode("http://localhost:8080/jspexample/callback.jsp", "UTF-8");
     String apiURL = "https://nid.naver.com/oauth2.0/token";
 
     try {
-        URL url = new URL(apiURL);
+        URL url = new URL(apiURL); 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
         con.setDoOutput(true);
